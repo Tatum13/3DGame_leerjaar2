@@ -227,7 +227,6 @@ MonoBehaviour:
   maxSpeed: 10
   turnStrenght: 90
   gravityForce: 10
-  dragOnGround: 3
   wahtIsGround:
     serializedVersion: 2
     m_Bits: 8
@@ -568,7 +567,7 @@ GameObject:
   - component: {fileID: 671204988}
   - component: {fileID: 671204987}
   m_Layer: 0
-  m_Name: Wheel (3)
+  m_Name: RB
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -877,7 +876,7 @@ GameObject:
   - component: {fileID: 829709325}
   - component: {fileID: 829709324}
   m_Layer: 0
-  m_Name: Wheel (1)
+  m_Name: RF
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -992,7 +991,7 @@ GameObject:
   - component: {fileID: 874715399}
   - component: {fileID: 874715398}
   m_Layer: 0
-  m_Name: Wheel
+  m_Name: LF
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1679,7 +1678,7 @@ GameObject:
   - component: {fileID: 1850988211}
   - component: {fileID: 1850988210}
   m_Layer: 0
-  m_Name: Wheel (2)
+  m_Name: LB
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1871,7 +1870,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2012945898}
   m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 1.96, y: 0, z: 25}
+  m_LocalPosition: {x: 1.5, y: 0, z: 25}
   m_LocalScale: {x: 1, y: 3.4599, z: 30}
   m_Children: []
   m_Father: {fileID: 1812724770}

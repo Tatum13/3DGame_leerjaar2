@@ -12,17 +12,27 @@ public class Carcontroller : MonoBehaviour
 
     public Rigidbody RB;
 
-    public float forwardAccel = 2f, reverseAccel = 1f, maxSpeed = 10f, turnStrenght = 90f, gravityForce = 10f, dragOnGround = 0f;
+    [Header("CAR STATS")]
+    public float forwardAccel = 2f;
+    public float reverseAccel = 1f;
+    public float maxSpeed = 10f;
+    public float turnStrenght = 90f;
+    public float gravityForce = 10f;
+    private float dragOnGround = 3f;
 
     private float speedInput, turnInput;
 
+    [Header("BOOLS")]
     private bool grounded;
 
+    [Header("RAY")]
     public LayerMask wahtIsGround;
     public float gourndRayLength = .5f;
     public Transform groundRayPoint;
 
-    public Transform leftFrontWheel, rightFrontWheel;
+    [Header("WHEELS STUFF")]
+    public Transform leftFrontWheel;
+    public Transform rightFrontWheel;
     public float maxWheelTrun = 40;
 
     void Start()
