@@ -23,7 +23,8 @@ public class Carcontroller : MonoBehaviour
     private float speedInput, turnInput;
 
     [Header("BOOLS")]
-    private bool grounded;
+    [SerializeField] private bool grounded;
+    [SerializeField] private bool drifting;
 
     [Header("RAY")]
     public LayerMask wahtIsGround;
@@ -42,6 +43,7 @@ public class Carcontroller : MonoBehaviour
 
     void Update()
     {
+        //vooruit en achteruit
         speedInput = 0;
         if(Input.GetAxis("Vertical") > 0)
         {
@@ -51,14 +53,24 @@ public class Carcontroller : MonoBehaviour
         {
             speedInput = Input.GetAxis("Vertical") * reverseAccel * 25f;
         }
-
         turnInput = Input.GetAxis("Horizontal");
 
+        //drift
+        if (Input.GetButtonDown("Jump") && !drifting && Input.GetAxis("Horizontal") != 0)
+        {
+            drifting = true;
+
+        }
+        if (Input.GetButtonUp("Jump") && drifting)
+            drifting = false;
+
+        //wielen draai
         if(grounded)
             transform.rotation = Quaternion.Euler(transform.rotation.eulerAngles + new Vector3(0f, turnInput * turnStrenght * Time.deltaTime * Input.GetAxis("Vertical"), 0f));
 
         leftFrontWheel.localRotation = Quaternion.Euler(leftFrontWheel.localRotation.eulerAngles.x, (turnInput * maxWheelTrun) - 180, leftFrontWheel.localRotation.eulerAngles.z);
         rightFrontWheel.localRotation = Quaternion.Euler(rightFrontWheel.localRotation.eulerAngles.x, turnInput * maxWheelTrun, rightFrontWheel.localRotation.eulerAngles.z);
+
 
         transform.position = RB.transform.position;
     }
