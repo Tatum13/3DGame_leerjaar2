@@ -20,11 +20,25 @@ public class Carcontroller : MonoBehaviour
     public float gravityForce = 10f;
     private float dragOnGround = 3f;
 
-    private float speedInput, turnInput;
+    //speedInput == current speed
+    [SerializeField] private float speedInput, turnInput;
+
+    [Header("DRIFTING")]
+    [SerializeField] private float driftTime;
+    public Color drift1;
+    public Color drift2;
+    public Color drift3;
+
+    private float boostTime = 0;
+
+    public Transform boostFire;
+    public Transform boostExplosion;
 
     [Header("BOOLS")]
     [SerializeField] private bool grounded;
-    [SerializeField] private bool drifting;
+    [SerializeField] private bool driftingRight;
+    [SerializeField] private bool driftingLeft;
+    [SerializeField] private bool isSliding;
 
     [Header("RAY")]
     public LayerMask wahtIsGround;
@@ -43,26 +57,8 @@ public class Carcontroller : MonoBehaviour
 
     void Update()
     {
-        //vooruit en achteruit
-        speedInput = 0;
-        if(Input.GetAxis("Vertical") > 0)
-        {
-            speedInput = Input.GetAxis("Vertical") * forwardAccel * 25f;
-        }
-        else if (Input.GetAxis("Vertical") < 0)
-        {
-            speedInput = Input.GetAxis("Vertical") * reverseAccel * 25f;
-        }
-        turnInput = Input.GetAxis("Horizontal");
-
-        //drift
-        if (Input.GetButtonDown("Jump") && !drifting && Input.GetAxis("Horizontal") != 0)
-        {
-            drifting = true;
-
-        }
-        if (Input.GetButtonUp("Jump") && drifting)
-            drifting = false;
+        Move();
+        Drift();
 
         //wielen draai
         if(grounded)
@@ -99,6 +95,42 @@ public class Carcontroller : MonoBehaviour
         {
             RB.drag = 0.1f;
             RB.AddForce(Vector3.up * -gravityForce * 5f);
+        }
+    }
+
+    private void Move()
+    {
+        //vooruit en achteruit
+        speedInput = 0;
+        if (Input.GetAxis("Vertical") > 0)
+        {
+            speedInput = Input.GetAxis("Vertical") * forwardAccel * 25f;
+        }
+        else if (Input.GetAxis("Vertical") < 0)
+        {
+            speedInput = Input.GetAxis("Vertical") * reverseAccel * 25f;
+        }
+        turnInput = Input.GetAxis("Horizontal");
+    }
+    private void Drift()
+    {
+        if(Input.GetButtonDown("Jump") && grounded)
+        {
+            if(turnInput > 0)
+            {
+                driftingRight = true;
+                driftingLeft = false;
+            }
+            else if (turnInput < 0)
+            {
+                driftingLeft = true;
+                driftingRight = false;
+            }
+        }
+
+        if(Input.GetButton("Jump") && grounded && speedInput > 30 && Input.GetAxis("Horizontal") != 0)
+        {
+            
         }
     }
 }

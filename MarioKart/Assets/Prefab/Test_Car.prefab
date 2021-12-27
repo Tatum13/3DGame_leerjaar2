@@ -104,6 +104,18 @@ MonoBehaviour:
   maxSpeed: 10
   turnStrenght: 90
   gravityForce: 10
+  speedInput: 0
+  turnInput: 0
+  driftTime: 0
+  drift1: {r: 0, g: 0.68195224, b: 1, a: 0}
+  drift2: {r: 1, g: 0.75263053, b: 0, a: 0}
+  drift3: {r: 0.7937579, g: 0, b: 1, a: 0}
+  boostFire: {fileID: 0}
+  boostExplosion: {fileID: 0}
+  grounded: 0
+  driftingRight: 0
+  driftingLeft: 0
+  isSliding: 0
   wahtIsGround:
     serializedVersion: 2
     m_Bits: 8
