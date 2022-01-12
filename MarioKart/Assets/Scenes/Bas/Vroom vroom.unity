@@ -580,6 +580,7 @@ MonoBehaviour:
   forwardAccel: 2
   reverseAccel: 1
   maxSpeed: 10
+  boostSpeed: 15
   turnStrenght: 90
   gravityForce: 10
   speedInput: 0

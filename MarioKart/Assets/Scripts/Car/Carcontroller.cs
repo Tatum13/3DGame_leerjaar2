@@ -63,9 +63,6 @@ public class Carcontroller : MonoBehaviour
         Boost();
 
         //wielen draai
-        if(grounded)
-            transform.rotation = Quaternion.Euler(transform.rotation.eulerAngles + new Vector3(0f, turnInput * turnStrenght * Time.deltaTime * Input.GetAxis("Vertical"), 0f));
-
         leftFrontWheel.localRotation = Quaternion.Euler(leftFrontWheel.localRotation.eulerAngles.x, (turnInput * maxWheelTrun) - 180, leftFrontWheel.localRotation.eulerAngles.z);
         rightFrontWheel.localRotation = Quaternion.Euler(rightFrontWheel.localRotation.eulerAngles.x, turnInput * maxWheelTrun, rightFrontWheel.localRotation.eulerAngles.z);
 
@@ -113,6 +110,9 @@ public class Carcontroller : MonoBehaviour
             speedInput = Input.GetAxis("Vertical") * reverseAccel * 25f;
         }
         turnInput = Input.GetAxis("Horizontal");
+
+        if (grounded)
+            transform.rotation = Quaternion.Euler(transform.rotation.eulerAngles + new Vector3(0f, turnInput * turnStrenght * Time.deltaTime * Input.GetAxis("Vertical"), 0f));
     }
     private void Drift()
     {
@@ -165,7 +165,7 @@ public class Carcontroller : MonoBehaviour
             driftTime = 0;
 
             //stop de particals ook hier
-
+            
         }
     }
     private void Boost()
