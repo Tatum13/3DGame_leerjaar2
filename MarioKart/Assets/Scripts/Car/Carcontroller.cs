@@ -16,7 +16,7 @@ public class Carcontroller : MonoBehaviour
     public float forwardAccel = 2f;
     public float reverseAccel = 1f;
     public float maxSpeed = 10f;
-    public float boostSpeed = 15f;
+    public float boostSpeed;
     public float turnStrenght = 90f;
     public float gravityForce = 10f;
     private float dragOnGround = 3f;
@@ -111,6 +111,7 @@ public class Carcontroller : MonoBehaviour
         }
         turnInput = Input.GetAxis("Horizontal");
 
+        //sturen
         if (grounded)
             transform.rotation = Quaternion.Euler(transform.rotation.eulerAngles + new Vector3(0f, turnInput * turnStrenght * Time.deltaTime * Input.GetAxis("Vertical"), 0f));
     }
@@ -122,24 +123,21 @@ public class Carcontroller : MonoBehaviour
             {
                 driftingRight = true;
                 driftingLeft = false;
-                Debug.Log("Rechts");
             }
             else if (turnInput < 0)
             {
                 driftingLeft = true;
                 driftingRight = false;
-                Debug.Log("links");
             }
         }
 
         if(Input.GetButton("Jump") && grounded && speedInput > 30 && Input.GetAxis("Horizontal") != 0)
         {
             driftTime += Time.deltaTime;
-            Debug.Log("ja");
-            //particals
+            //particals/
         }
 
-        if(Input.GetButton("Jump") || speedInput < 30)
+        if(Input.GetButtonUp("Jump"))
         {
             driftingRight = false;
             driftingLeft = false;
@@ -164,7 +162,7 @@ public class Carcontroller : MonoBehaviour
             //reset everything
             driftTime = 0;
 
-            //stop de particals ook hier
+            //stop de particals ook hier/
             
         }
     }
@@ -173,16 +171,16 @@ public class Carcontroller : MonoBehaviour
         boostTime -= Time.deltaTime;
         if(boostTime > 0)
         {
-            //uitlaat vuur partical aan roepen
+            //uitlaat vuur partical aan roepen/
 
             maxSpeed = boostSpeed;
             speedInput = Mathf.Lerp(speedInput, maxSpeed, 1 * Time.deltaTime);
         }
         else
         {
-            //STOP uitlaat vuur partical aan roepen
+            //STOP uitlaat vuur partical aan roepen/
 
-            maxSpeed = boostSpeed - 5f;
+            maxSpeed = boostSpeed - 20f;
         }
     }
 }
