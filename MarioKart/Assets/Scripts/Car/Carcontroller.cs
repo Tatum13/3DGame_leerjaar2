@@ -11,6 +11,7 @@ public class Carcontroller : MonoBehaviour
     /// </summary>
 
     public Rigidbody RB;
+    public GameObject viuals;
 
     [Header("CAR STATS")]
     public float forwardAccel = 2f;
@@ -25,6 +26,7 @@ public class Carcontroller : MonoBehaviour
     [SerializeField] private float speedInput, turnInput;
 
     [Header("DRIFTING")]
+    [SerializeField]private float steerDirection;
     [SerializeField] private float driftTime;
     public Color drift1;
     public Color drift2;
@@ -53,19 +55,19 @@ public class Carcontroller : MonoBehaviour
 
     void Start()
     {
-        RB.transform.parent = null;
+        RB.transform.parent = null; 
     }
 
     void Update()
     {
         Move();
+        Steering();
         Drift();
         Boost();
 
         //wielen draai
         leftFrontWheel.localRotation = Quaternion.Euler(leftFrontWheel.localRotation.eulerAngles.x, (turnInput * maxWheelTrun) - 180, leftFrontWheel.localRotation.eulerAngles.z);
         rightFrontWheel.localRotation = Quaternion.Euler(rightFrontWheel.localRotation.eulerAngles.x, turnInput * maxWheelTrun, rightFrontWheel.localRotation.eulerAngles.z);
-
 
         transform.position = RB.transform.position;
     }
@@ -115,6 +117,27 @@ public class Carcontroller : MonoBehaviour
         if (grounded)
             transform.rotation = Quaternion.Euler(transform.rotation.eulerAngles + new Vector3(0f, turnInput * turnStrenght * Time.deltaTime * Input.GetAxis("Vertical"), 0f));
     }
+    private void Steering()
+    {
+        ///<summary>
+        ///maak de sliding angle op 35 graden
+        ///</summary>
+        
+        steerDirection = Input.GetAxisRaw("Horizontal"); // -1, 0, 1
+
+        if (driftingLeft && !driftingRight && speedInput == 50)
+        {
+            steerDirection = Input.GetAxisRaw("Horizontal") < 0 ? -1.5f : -0.5f;
+            viuals.transform.rotation = Quaternion.Euler(transform.rotation.eulerAngles + new Vector3(0f, -35f, 0f));
+        }
+        else if (!driftingLeft && driftingRight && speedInput == 50)
+        {
+            steerDirection = Input.GetAxisRaw("Horizontal") > 0 ? 1.5f : 0.5f;
+            viuals.transform.rotation = Quaternion.Euler(transform.rotation.eulerAngles + new Vector3(0f, 35f, 0f));
+        }
+        else
+            viuals.transform.rotation = Quaternion.Euler(transform.rotation.eulerAngles + new Vector3(0f, 0f, 0f));
+    }
     private void Drift()
     {
         if(Input.GetButtonDown("Jump") && grounded)
@@ -143,17 +166,17 @@ public class Carcontroller : MonoBehaviour
             driftingLeft = false;
             isSliding = false;
 
-            if (driftTime > 1.5 && driftTime < 4)
+            if (driftTime > 1.5 && driftTime < 2.5)
             {
                 boostTime = 0.75f;
                 Debug.Log("kleine boost");
             }
-            if (driftTime > 4 && driftTime < 7)
+            else if (driftTime < 5)
             {
                 boostTime = 1.5f;
                 Debug.Log("meduim boost");
             }
-            if (driftTime >= 7)
+            else if (driftTime >= 5)
             {
                 boostTime = 2.5f;
                 Debug.Log("groote boost");
@@ -161,6 +184,7 @@ public class Carcontroller : MonoBehaviour
 
             //reset everything
             driftTime = 0;
+            isSliding = false;
 
             //stop de particals ook hier/
             
