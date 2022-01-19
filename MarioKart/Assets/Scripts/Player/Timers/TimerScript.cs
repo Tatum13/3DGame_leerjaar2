@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using System;
 
 public class TimerScript : MonoBehaviour
 {
@@ -11,33 +12,43 @@ public class TimerScript : MonoBehaviour
     private float timer;
     public bool startTheTimer;
 
-    private void Update()
+    string FormatTime(float time)
     {
-        timer += Time.deltaTime;
-        //print(FormatTimer(timer));
-        
-        if(startTheTimer == true)
-        {
-            FormatTimer(timer);
-        }
-
+        int intTime = (int)time;
+        int minutes = intTime / 60;
+        int seconds = intTime % 60;
+        float fraction = time * 1000;
+        fraction = (fraction % 1000);
+        string timeText = String.Format("{0:00}:{1:00}:{2:000}", minutes, seconds, fraction);
+        return timeText;
     }
 
+ 
+    private void Update()
+    {
+        if(startTheTimer == true)
+        {
+            timer += Time.deltaTime;
+            timerText.text = "Time " + FormatTime(timer);
+        }
+    }
+
+    /*
     private string FormatTimer(float timer)
     {
         int minutes = (int)timer / 60;
         int seconds = (int)timer - (minutes * 60);
-        string milisecondes = timer.ToString().Split('.')[1].Substring(0, 3);//Aantal getallen achter de punt.
+        string miliseconds = timer.ToString().Split('.')[1].Substring(0, 3);//Aantal getallen achter de punt.En gekke error.
         //string milisecondes = timer.ToString().Split('.')[1];//Aantal getallen achter de punt.
-        string formattedTime = minutes.ToString("D2") + ":" + seconds.ToString("D2") + "." + milisecondes;
-        if (milisecondes == timer.ToString().Split('.')[1].Substring(0,3))
+        string formattedTime = minutes.ToString("D2") + ":" + seconds.ToString("D2") + "." + miliseconds;
+        if (miliseconds == timer.ToString().Split('.')[1].Substring(0,3))
         {
-            Debug.Log(milisecondes.Length);//Zonder de substring geeft die 5 of 6 aan. Met geeft het 3 aan.
+            //Debug.Log(milisecondes.Length);//Zonder de substring geeft die 5 of 6 aan. Met geeft het 3 aan.
         }
         timerText.text = "Time " + formattedTime;
         return formattedTime;
     }
-   
+   */
     /*
     private float timer;
     public float delay = 0f;
