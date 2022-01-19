@@ -118,11 +118,7 @@ public class Carcontroller : MonoBehaviour
             transform.rotation = Quaternion.Euler(transform.rotation.eulerAngles + new Vector3(0f, turnInput * turnStrenght * Time.deltaTime * Input.GetAxis("Vertical"), 0f));
     }
     private void Steering()
-    {
-        ///<summary>
-        ///maak de sliding angle op 35 graden
-        ///</summary>
-        
+    {       
         steerDirection = Input.GetAxisRaw("Horizontal"); // -1, 0, 1
 
         if (driftingLeft && !driftingRight && speedInput == 50)
