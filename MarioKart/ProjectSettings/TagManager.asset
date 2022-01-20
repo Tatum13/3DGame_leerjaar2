@@ -6,6 +6,7 @@ TagManager:
   tags:
   - FinishLine
   - Checkpoint
+  - Itembox
   layers:
   - Default
   - TransparentFX
