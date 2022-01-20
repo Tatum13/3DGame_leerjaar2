@@ -134,22 +134,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.1
-  RB: {fileID: 0}
-  viuals: {fileID: 0}
-  playerCamera: {fileID: 0}
+  RB: {fileID: 4284302697295750634}
+  viuals: {fileID: 4284302697295750600}
+  playerCamera: {fileID: 4284302697295750629}
   forwardAccel: 2
   reverseAccel: 1
   maxSpeed: 10
-  boostSpeed: 0
+  boostSpeed: 30
   turnStrenght: 90
   gravityForce: 10
   speedInput: 0
   turnInput: 0
   steerDirection: 0
   driftTime: 0
-  drift1: {r: 0, g: 0, b: 0, a: 0}
-  drift2: {r: 0, g: 0, b: 0, a: 0}
-  drift3: {r: 0, g: 0, b: 0, a: 0}
+  drift1: {r: 0, g: 0.83824706, b: 1, a: 1}
+  drift2: {r: 1, g: 0.88279974, b: 0, a: 1}
+  drift3: {r: 1, g: 0, b: 0.7383909, a: 1}
   boostFire: {fileID: 0}
   boostExplosion: {fileID: 0}
   grounded: 0
@@ -158,12 +158,12 @@ MonoBehaviour:
   isSliding: 0
   wahtIsGround:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 8
   gourndRayLength: 0.5
-  groundRayPoint: {fileID: 0}
-  leftFrontWheel: {fileID: 0}
-  rightFrontWheel: {fileID: 0}
-  maxWheelTrun: 40
+  groundRayPoint: {fileID: 4284302697295750654}
+  leftFrontWheel: {fileID: 4284302697295750649}
+  rightFrontWheel: {fileID: 4284302697295750651}
+  maxWheelTrun: 25
 --- !u!1 &4284302697295750602
 GameObject:
   m_ObjectHideFlags: 0
