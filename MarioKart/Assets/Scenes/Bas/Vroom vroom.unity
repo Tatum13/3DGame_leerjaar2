@@ -635,6 +635,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   RB: {fileID: 1427161138}
   viuals: {fileID: 0}
+  driftSpark: {fileID: 0}
   forwardAccel: 2
   reverseAccel: 1
   maxSpeed: 10
@@ -2134,30 +2135,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 421925119, guid: bae5f77a544eb974484194d1f5bff40f, type: 3}
-      propertyPath: ShapeModule.m_Rotation.x
-      value: 330.6924
-      objectReference: {fileID: 0}
-    - target: {fileID: 421925119, guid: bae5f77a544eb974484194d1f5bff40f, type: 3}
-      propertyPath: ShapeModule.m_Rotation.y
-      value: 238.6832
-      objectReference: {fileID: 0}
-    - target: {fileID: 421925119, guid: bae5f77a544eb974484194d1f5bff40f, type: 3}
-      propertyPath: ShapeModule.m_Rotation.z
-      value: 106.58437
-      objectReference: {fileID: 0}
-    - target: {fileID: 1386848378, guid: bae5f77a544eb974484194d1f5bff40f, type: 3}
-      propertyPath: ShapeModule.m_Rotation.x
-      value: 331.83698
-      objectReference: {fileID: 0}
-    - target: {fileID: 1386848378, guid: bae5f77a544eb974484194d1f5bff40f, type: 3}
-      propertyPath: ShapeModule.m_Rotation.y
-      value: 305.43604
-      objectReference: {fileID: 0}
-    - target: {fileID: 1386848378, guid: bae5f77a544eb974484194d1f5bff40f, type: 3}
-      propertyPath: ShapeModule.m_Rotation.z
-      value: 71.434494
-      objectReference: {fileID: 0}
     - target: {fileID: 6666887523305758599, guid: bae5f77a544eb974484194d1f5bff40f, type: 3}
       propertyPath: m_RootOrder
       value: 2

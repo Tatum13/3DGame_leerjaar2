@@ -12,6 +12,7 @@ public class Carcontroller : MonoBehaviour
 
     public Rigidbody RB;
     public GameObject viuals;
+    public Transform driftSpark;
 
     [Header("CAR STATS")]
     public float forwardAccel = 2f;
@@ -55,7 +56,7 @@ public class Carcontroller : MonoBehaviour
 
     void Start()
     {
-        RB.transform.parent = null; 
+        RB.transform.parent = null;
     }
 
     void Update()
@@ -136,7 +137,8 @@ public class Carcontroller : MonoBehaviour
     }
     private void Drift()
     {
-        if(Input.GetButtonDown("Jump") && grounded)
+
+        if (Input.GetButtonDown("Jump") && grounded)
         {
             if(turnInput > 0)
             {
@@ -153,7 +155,41 @@ public class Carcontroller : MonoBehaviour
         if(Input.GetButton("Jump") && grounded && speedInput > 30 && Input.GetAxis("Horizontal") != 0)
         {
             driftTime += Time.deltaTime;
-            //particals/
+
+            //particels color stuff
+            if (driftTime < 2.5)
+            {
+                for (int i = 0; i < driftSpark.childCount; i++)
+                {
+                    ParticleSystem driftPS = driftSpark.transform.GetChild(i).gameObject.GetComponent<ParticleSystem>();
+                    ParticleSystem.MainModule PSMain = driftPS.main;
+
+                    PSMain.startColor = drift1;
+                    if (!driftPS.isPlaying)
+                        driftPS.Play();
+                    driftPS.gameObject.SetActive(true);
+                }
+            }
+            else if (driftTime < 5)
+            {
+                for (int i = 0; i < driftSpark.childCount; i++)
+                {
+                    ParticleSystem driftPS = driftSpark.transform.GetChild(i).gameObject.GetComponent<ParticleSystem>();
+                    ParticleSystem.MainModule PSMain = driftPS.main;
+
+                    PSMain.startColor = drift2;
+                }
+            }
+            else if (driftTime >= 5)
+            {
+                for (int i = 0; i < driftSpark.childCount; i++)
+                {
+                    ParticleSystem driftPS = driftSpark.transform.GetChild(i).gameObject.GetComponent<ParticleSystem>();
+                    ParticleSystem.MainModule PSMain = driftPS.main;
+
+                    PSMain.startColor = drift3;
+                }
+            }
         }
 
         if(Input.GetButtonUp("Jump"))
@@ -182,8 +218,14 @@ public class Carcontroller : MonoBehaviour
             driftTime = 0;
             isSliding = false;
 
-            //stop de particals ook hier/
-            
+            //stop particals
+            for (int i = 0; i < driftSpark.childCount; i++)
+            {
+                ParticleSystem driftPS = driftSpark.transform.GetChild(i).gameObject.GetComponent<ParticleSystem>();
+                ParticleSystem.MainModule PSMain = driftPS.main;
+
+                driftPS.Stop();
+            }
         }
     }
     private void Boost()
