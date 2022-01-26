@@ -6,18 +6,34 @@ using UnityEngine.UI;
 public class ItemboxSpriteScript : MonoBehaviour
 {
     public Sprite[] sprites = new Sprite[3];
-    public Sprite currentSprite;
+    public Image currentSprite;
+
+    public Animator animator;
 
     private void Start()
     {
-        currentSprite = sprites[0];
+        currentSprite = gameObject.GetComponent<Image>();
+        currentSprite.sprite = sprites[0];
+    }
 
-        gameObject.GetComponent<Image>().sprite = currentSprite;
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.LeftControl) && currentSprite.sprite == sprites[0])
+        {
+            SetSprite(1);
+        }
+        else if(Input.GetKeyDown(KeyCode.LeftControl) && currentSprite.sprite == sprites[1])
+        {
+            SetSprite(2);
+        }
+        else if (Input.GetKeyDown(KeyCode.LeftControl) && currentSprite.sprite == sprites[2])
+        {
+            animator.SetBool("isThere", false);
+        }
     }
 
     public void SetSprite(int spriteNumber)
     {
-        currentSprite = sprites[spriteNumber];
-        gameObject.GetComponent<Image>().sprite = currentSprite;
+        currentSprite.sprite = sprites[spriteNumber];
     }
 }
