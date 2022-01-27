@@ -66,7 +66,7 @@ public class Carcontroller : MonoBehaviour
         Drift();
         Boost();
 
-        //wielen draai
+        ///wielen draai
         leftFrontWheel.localRotation = Quaternion.Euler(leftFrontWheel.localRotation.eulerAngles.x, (turnInput * maxWheelTrun) - 180, leftFrontWheel.localRotation.eulerAngles.z);
         rightFrontWheel.localRotation = Quaternion.Euler(rightFrontWheel.localRotation.eulerAngles.x, turnInput * maxWheelTrun, rightFrontWheel.localRotation.eulerAngles.z);
 
@@ -102,7 +102,7 @@ public class Carcontroller : MonoBehaviour
 
     private void Move()
     {
-        //vooruit en achteruit
+        ///vooruit en achteruit
         speedInput = 0;
         if (Input.GetAxis("Vertical") > 0)
         {
@@ -114,7 +114,7 @@ public class Carcontroller : MonoBehaviour
         }
         turnInput = Input.GetAxis("Horizontal");
 
-        //sturen
+        ///sturen
         if (grounded)
             transform.rotation = Quaternion.Euler(transform.rotation.eulerAngles + new Vector3(0f, turnInput * turnStrenght * Time.deltaTime * Input.GetAxis("Vertical"), 0f));
     }
@@ -140,7 +140,9 @@ public class Carcontroller : MonoBehaviour
 
         if (Input.GetButtonDown("Jump") && grounded)
         {
-            if(turnInput > 0)
+            //viuals.transform.position += new Vector3(0f, 0.1f, 0f);
+
+            if (turnInput > 0)
             {
                 driftingRight = true;
                 driftingLeft = false;
@@ -156,7 +158,7 @@ public class Carcontroller : MonoBehaviour
         {
             driftTime += Time.deltaTime;
 
-            //particels color stuff
+            ///particels color stuff
             if(driftTime < 1)
             {
                 for(int i = 0; i < driftSpark.childCount; i++)
@@ -204,6 +206,8 @@ public class Carcontroller : MonoBehaviour
 
         if(Input.GetButtonUp("Jump"))
         {
+            //viuals.transform.position -= new Vector3(0f, 0.1f, 0f);
+
             driftingRight = false;
             driftingLeft = false;
             isSliding = false;
@@ -211,24 +215,24 @@ public class Carcontroller : MonoBehaviour
             if (driftTime > 1.5 && driftTime < 2.5)
             {
                 boostTime = 0.75f;
-                Debug.Log("kleine boost");
+                //Debug.Log("kleine boost");
             }
             else if (driftTime < 5)
             {
                 boostTime = 1.5f;
-                Debug.Log("meduim boost");
+                //Debug.Log("meduim boost");
             }
             else if (driftTime >= 5)
             {
                 boostTime = 2.5f;
-                Debug.Log("groote boost");
+                //Debug.Log("groote boost");
             }
 
-            //reset everything
+            ///reset everything
             driftTime = 0;
             isSliding = false;
 
-            //stop particals
+            ///stop particals
             for (int i = 0; i < driftSpark.childCount; i++)
             {
                 ParticleSystem driftPS = driftSpark.transform.GetChild(i).gameObject.GetComponent<ParticleSystem>();
