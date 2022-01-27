@@ -157,7 +157,17 @@ public class Carcontroller : MonoBehaviour
             driftTime += Time.deltaTime;
 
             //particels color stuff
-            if (driftTime < 2.5)
+            if(driftTime < 1)
+            {
+                for(int i = 0; i < driftSpark.childCount; i++)
+                {
+                    ParticleSystem driftPS = driftSpark.transform.GetChild(i).gameObject.GetComponent<ParticleSystem>();
+                    ParticleSystem.MainModule PSMain = driftPS.main;
+
+                    driftPS.gameObject.SetActive(false);
+                }
+            }
+            else if (driftTime < 2.5)
             {
                 for (int i = 0; i < driftSpark.childCount; i++)
                 {
