@@ -8,9 +8,11 @@ using System;
 public class TimerScript : MonoBehaviour
 {
     public TMP_Text timerText;
+    public AudioSource mainMusic;
 
     private float timer;
     public bool startTheTimer;
+    public bool musicStart = false;
 
     string FormatTime(float time)
     {
@@ -23,16 +25,27 @@ public class TimerScript : MonoBehaviour
         return timeText;
     }
 
- 
+    private void Start()
+    {
+        mainMusic = GetComponent<AudioSource>();
+    }
+
     private void Update()
     {
+        if(musicStart == true)
+        {
+            mainMusic.Play(0);
+            musicStart = false;
+        }
+
         if(startTheTimer == true)
         {
+            musicStart = true;
             timer += Time.deltaTime;
             timerText.text = "Time " + FormatTime(timer);
         }
     }
-
+    
     /*
     private string FormatTimer(float timer)
     {
