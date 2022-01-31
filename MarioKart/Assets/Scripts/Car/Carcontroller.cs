@@ -137,10 +137,15 @@ public class Carcontroller : MonoBehaviour
     }
     private void Drift()
     {
+        if (isSliding && turnInput == 0)
+        {
+            
+        }
 
-        if (Input.GetButtonDown("Jump") && grounded)
+        if (Input.GetButtonDown("Jump") && grounded && !isSliding)
         {
             //viuals.transform.position += new Vector3(0f, 0.1f, 0f);
+            isSliding = true;
 
             if (turnInput > 0)
             {
@@ -158,8 +163,12 @@ public class Carcontroller : MonoBehaviour
         {
             driftTime += Time.deltaTime;
 
+            ///sturen
+            if (grounded)
+                transform.rotation = Quaternion.Euler(transform.rotation.eulerAngles + new Vector3(0f, turnInput * turnStrenght * Time.deltaTime * Input.GetAxis("Vertical"), 0f));
+
             ///particels color stuff
-            if(driftTime < 1)
+            if (driftTime < 1)
             {
                 for(int i = 0; i < driftSpark.childCount; i++)
                 {
