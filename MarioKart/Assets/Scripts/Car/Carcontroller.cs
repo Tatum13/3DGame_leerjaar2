@@ -137,12 +137,7 @@ public class Carcontroller : MonoBehaviour
     }
     private void Drift()
     {
-        if (isSliding && turnInput == 0)
-        {
-            
-        }
-
-        if (Input.GetButtonDown("Jump") && grounded && !isSliding)
+        if(Input.GetButtonDown("Jump") && grounded && !isSliding)
         {
             //viuals.transform.position += new Vector3(0f, 0.1f, 0f);
             isSliding = true;
@@ -210,6 +205,50 @@ public class Carcontroller : MonoBehaviour
 
                     PSMain.startColor = drift3;
                 }
+            }
+        }
+        if(Input.GetButton("Jump") && turnInput == 0)
+        {
+            driftTime = 0f;
+            viuals.transform.rotation = Quaternion.Euler(transform.rotation.eulerAngles + new Vector3(0f, 0f, 0f));
+
+            driftingLeft = false;
+            driftingRight = false;
+            isSliding = false;
+
+            ///stop particals
+            for (int i = 0; i < driftSpark.childCount; i++)
+            {
+                ParticleSystem driftPS = driftSpark.transform.GetChild(i).gameObject.GetComponent<ParticleSystem>();
+                ParticleSystem.MainModule PSMain = driftPS.main;
+
+                driftPS.Stop();
+            }
+        }
+        if(Input.GetButton("Jump") && turnInput != 0)
+        {
+            isSliding = true;
+
+            if (turnInput > 0)
+            {
+                driftingRight = true;
+                driftingLeft = false;
+            }
+            else if (turnInput < 0)
+            {
+                driftingLeft = true;
+                driftingRight = false;
+            }
+
+            if (driftingLeft && !driftingRight && speedInput == 50)
+            {
+                steerDirection = Input.GetAxisRaw("Horizontal") < 0 ? -1.5f : -0.5f;
+                viuals.transform.rotation = Quaternion.Euler(transform.rotation.eulerAngles + new Vector3(0f, -35f, 0f));
+            }
+            else if (!driftingLeft && driftingRight && speedInput == 50)
+            {
+                steerDirection = Input.GetAxisRaw("Horizontal") > 0 ? 1.5f : 0.5f;
+                viuals.transform.rotation = Quaternion.Euler(transform.rotation.eulerAngles + new Vector3(0f, 35f, 0f));
             }
         }
 
